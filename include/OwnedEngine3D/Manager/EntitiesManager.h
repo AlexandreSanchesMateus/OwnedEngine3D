@@ -6,7 +6,7 @@
 class OWNED_ENGINE_API EntitiesManager
 {
 public:
-	EntitiesManager(const std::string& fileName);
+	EntitiesManager();
 	~EntitiesManager();
 
 	entt::registry* GetRegister();

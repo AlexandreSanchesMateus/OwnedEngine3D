@@ -1,4 +1,4 @@
-#include "OwnedEngine3D/Shader.h"
+#include "OwnedEngine3D/GraphicsPipeline/Shader.h"
 #include "OwnedEngine3D/Engine/GPUDevice.h"
 #include "SDL3/SDL_gpu.h"
 

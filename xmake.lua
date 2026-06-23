@@ -1,7 +1,7 @@
 add_rules("mode.debug", "mode.release")
 add_rules("plugin.vsxmake.autoupdate")
 
-add_requires("fmt", "libsdl3", "libsdl3_image", "libsdl3_ttf", "entt", "glm", "rapidjson", "lua")
+add_requires("fmt", "libsdl3", "libsdl3_image", "libsdl3_ttf", "entt", "glm", "rapidjson", "lua", cgltf)
 add_requires("openal-soft", { configs = { shared = true }})
 add_requires("imgui", {configs = {sdl3 = true, sdl3_renderer = true }})
 
@@ -41,7 +41,7 @@ target("OwnedEngine3D")
 
     add_headerfiles("include/OwnedEngine3D/**.h")
     add_files("src/OwnedEngine3D/**.cpp")
-    add_packages("fmt", "libsdl3", "libsdl3_image", "libsdl3_ttf", "imgui", "entt", "glm", "rapidjson", "openal-soft","lua", { public = true })
+    add_packages("fmt", "libsdl3", "libsdl3_image", "libsdl3_ttf", "imgui", "entt", "glm", "rapidjson", "openal-soft","lua","cgltf", { public = true })
     add_defines("OWNED_ENGINE_BUILD")
 
     if is_mode("distrib") then

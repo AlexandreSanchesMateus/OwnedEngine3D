@@ -1,7 +1,7 @@
 #pragma once
 
 #include "OwnedEngine3D/Export.h"
-#include "OwnedEngine3D/Vertex.h"
+#include "OwnedEngine3D/GraphicsPipeline/Vertex.h"
 #include <vector>
 
 class OWNED_ENGINE_API Mesh

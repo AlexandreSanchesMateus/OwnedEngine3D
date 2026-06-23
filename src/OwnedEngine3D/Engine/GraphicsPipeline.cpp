@@ -2,8 +2,8 @@
 #include "OwnedEngine3D/Engine/GPUDevice.h"
 #include "OwnedEngine3D/Engine/Window.h"
 #include "OwnedEngine3D/Manager/ResourcesManager.h"
-#include "OwnedEngine3D/Shader.h"
-#include "OwnedEngine3D/Vertex.h"
+#include "OwnedEngine3D/GraphicsPipeline/Shader.h"
+#include "OwnedEngine3D/GraphicsPipeline/Vertex.h"
 #include <SDL3/SDL_gpu.h>
 
 GraphicsPipeline::GraphicsPipeline(GPUDevice* device, Window* window, ResourcesManager* resourcesManager) : m_device(device)

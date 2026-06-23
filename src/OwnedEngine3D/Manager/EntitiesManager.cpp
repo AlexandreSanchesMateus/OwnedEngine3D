@@ -3,9 +3,9 @@
 #include "OwnedEngine3D/Component/MetadataComponent.h"
 
 
-EntitiesManager::EntitiesManager(const std::string& fileName) : m_registry(entt::registry())
+EntitiesManager::EntitiesManager() : m_registry(entt::registry())
 {
-	rapidjson::Document doc = fileutil::ReadJsonFile(paths::Configs / fileName);
+	/*rapidjson::Document doc = fileutil::ReadJsonFile(paths::Configs / fileName);
 	const rapidjson::Value& tagArray = doc["tags"];
 	const rapidjson::Value& layerArray = doc["layers"];
 
@@ -17,7 +17,7 @@ EntitiesManager::EntitiesManager(const std::string& fileName) : m_registry(entt:
 	for (rapidjson::Value::ConstValueIterator it = layerArray.Begin(); it != layerArray.End(); ++it)
 	{
 		m_layerName.push_back(it->GetString());
-	}
+	}*/
 }
 
 EntitiesManager::~EntitiesManager()

@@ -10,11 +10,11 @@ class OWNED_ENGINE_API Window
 public:
 	Window(const std::string& title, int wigth, int height, std::uint32_t flags = 0);
 	Window(const Window&) = delete;
-	Window(Window&&) = delete;
+	Window(Window&& other) = delete;
 	~Window();
 
 	Window& operator=(const Window&) = delete;
-	Window& operator=(Window&&) = delete;
+	Window& operator=(Window&& other) = delete;
 
 	void ClaimWindowForGPUDevice(GPUDevice* device);
 

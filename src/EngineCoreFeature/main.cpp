@@ -12,7 +12,7 @@
 
 // Tempo
 #include <SDL3/SDL.h>
-#include "OwnedEngine3D/Vertex.h"
+#include "OwnedEngine3D/GraphicsPipeline/Vertex.h"
 #include "OwnedEngine3D/Transform.h"
 
 #include "OwnedEngine3D/Logger/Logger.h"

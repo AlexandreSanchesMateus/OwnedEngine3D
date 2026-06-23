@@ -1,37 +1,37 @@
 #include "OwnedEngine3D/OwnedEngine.h"
-#include "OwnedEngine3D/Engine/Core.h"
-
+#include "OwnedEngine3D/File.h"
 #include <thread>
-#include <chrono>
 #include <SDL3/SDL.h>
 
-OwnedEngine::OwnedEngine()
+#include "OwnedEngine3D/Render/IRenderer.h"
+
+std::chrono::milliseconds OwnedEngine::timestep = std::chrono::milliseconds(5);          // around 200 fps
+std::chrono::milliseconds OwnedEngine::fixedTimestep = std::chrono::milliseconds(16);    // around 60 fps
+
+#ifdef WITH_EDITOR
+#define DEBUG_GPU_MODE true
+#else 
+#define DEBUG_GPU_MODE false
+#endif
+
+
+OwnedEngine::OwnedEngine(const EngineDescriptor& descriptor)
+	: m_core(),
+	m_window(descriptor.windowName, descriptor.windowWidth, descriptor.windowHeight, descriptor.windowFlags),
+	m_gpuDevice(descriptor.shaderFormat, DEBUG_GPU_MODE),
+	m_resourcesManager(&m_gpuDevice),
+	m_entityManager(),
+	m_inputManager()
 {
-	// Load from config files
+	timestep = std::chrono::milliseconds((long)descriptor.timestep);
+	fixedTimestep = std::chrono::milliseconds((long)descriptor.fixeTimestep);
 
-	// Init Window
-	// Init GPU Device
-	// Init Pipelines
+	// Load Pipelines (or renderer)
 
-	// Init Services
-	// Ressources
-	// Input
-}
-
-OwnedEngine::~OwnedEngine()
-{
-	// Uninitialize if needed
-	// A lot of wrapper
 }
 
 void OwnedEngine::Run()
 {
-	// Should be a variable in the class
-	// Loaded from config file
-	const std::chrono::milliseconds timestep(5); // around 200 fps
-	const std::chrono::milliseconds fixedTimestep(16); // around 60 fps
-
-
 	std::chrono::nanoseconds lag(0);
 	auto lateTime = std::chrono::high_resolution_clock::now();
 
@@ -54,13 +54,13 @@ void OwnedEngine::Run()
 		SDL_Event event;
 		while (Core::PollEvent(&event))
 		{
-			// inputManager.HandleEvent(event, deltaTimeSecond);
+			m_inputManager.HandleEvent(event, deltaTimeSecond);
 
 			if (event.type == SDL_EVENT_QUIT)
 				running = false;
 		}
 
-		// inputManager.HandleLateEvent(deltaTimeSecond);
+		m_inputManager.HandleLateEvent(deltaTimeSecond);
 
 
 		// Update (delta_time, interpolation)
@@ -81,16 +81,32 @@ void OwnedEngine::Run()
 	}
 }
 
+EngineDescriptor OwnedEngine::PaseDescriptorFromFile(const std::string& configName)
+{
+	// TODO
+	// Parse Json File
+
+	EngineDescriptor descriptor{
+		"Owned Engine 3D",
+		1280,
+		720,
+		NULL,
+		SDL_GPU_SHADERFORMAT_SPIRV
+	};
+
+	return descriptor;
+}
+
 
 
 
 void OwnedEngine::DrawScreen()
 {
-	/*SDL_GPUCommandBuffer* commandBuffer = SDL_AcquireGPUCommandBuffer(device.GetHandle());
+	SDL_GPUCommandBuffer* commandBuffer = SDL_AcquireGPUCommandBuffer(m_gpuDevice.GetHandle());
 
 	SDL_GPUTexture* swapchainTexture;
 	Uint32 width, height;
-	SDL_WaitAndAcquireGPUSwapchainTexture(commandBuffer, window.GetHandle(), &swapchainTexture, &width, &height);
+	SDL_WaitAndAcquireGPUSwapchainTexture(commandBuffer, m_window.GetHandle(), &swapchainTexture, &width, &height);
 
 
 	if (!swapchainTexture)
@@ -101,20 +117,27 @@ void OwnedEngine::DrawScreen()
 
 	// Clear screen
 	SDL_GPUColorTargetInfo colorTargetInfo{};
-	colorTargetInfo.clear_color = { 240 / 255.0f, 240 / 255.0f, 240 / 255.0f, 255 / 255.0f };
+	colorTargetInfo.clear_color = { 0.f, 0.f, 0.f };
 	colorTargetInfo.load_op = SDL_GPU_LOADOP_CLEAR;
 	colorTargetInfo.store_op = SDL_GPU_STOREOP_STORE;
 	colorTargetInfo.texture = swapchainTexture;
 
 
-	// Draw calls :
-	//     BeginRenderPass
-	//     BindPipeline
-	//     DrawPrimitives
-	//     EndRender¨Pass
-
-	// For each pipeline (model, skelet animation, skybox, UI, ...)
+	SDL_GPURenderPass* renderPass = SDL_BeginGPURenderPass(commandBuffer, &colorTargetInfo, 1, NULL);
 
 
-	SDL_SubmitGPUCommandBuffer(commandBuffer);*/
+	// Uniform buffer
+	// Récupère la caméra
+	// Projection * View
+
+	for (std::vector<std::unique_ptr<IRenderer>>::iterator it = m_renderers.begin(); it != m_renderers.end(); ++it)
+	{
+		// Need to reference RenderPass and ECS registry
+		// BindPipeline
+		// DrawPrimitives
+		(*it)->Render();
+	}
+
+	SDL_EndGPURenderPass(renderPass);
+	SDL_SubmitGPUCommandBuffer(commandBuffer);
 }

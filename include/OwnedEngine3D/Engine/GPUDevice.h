@@ -8,14 +8,13 @@ class OWNED_ENGINE_API GPUDevice
 {
 public:
 	GPUDevice(std::uint32_t flags, bool debugMode);
+	GPUDevice(const GPUDevice&) = delete;
+	GPUDevice(GPUDevice&& other) = delete;
 	~GPUDevice();
 
-	GPUDevice(const GPUDevice&) = delete;
-	GPUDevice(GPUDevice&&) = delete;
-
 	GPUDevice& operator=(const GPUDevice&) = delete;
-	GPUDevice& operator=(GPUDevice&&) = delete;
-
+	GPUDevice& operator=(GPUDevice&& other) = delete;
+	
 	SDL_GPUDevice* GetHandle() const;
 
 private:

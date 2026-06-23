@@ -2,7 +2,7 @@
 #include "OwnedEngine3D/File.h"
 #include <stdexcept>
 
-#include "OwnedEngine3D/Shader.h"
+#include "OwnedEngine3D/GraphicsPipeline/Shader.h"
 
 
 ResourcesManager::ResourcesManager(GPUDevice* device): m_device(device)
