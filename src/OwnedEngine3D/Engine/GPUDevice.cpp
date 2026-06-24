@@ -1,5 +1,5 @@
 #include "OwnedEngine3D/Engine/GPUDevice.h"
-#include "SDL3/SDL_gpu.h"
+#include <SDL3/SDL_gpu.h>
 #include <stdexcept>
 
 GPUDevice::GPUDevice(std::uint32_t flags, bool debugMode)

@@ -1,4 +1,4 @@
-#include <OwnedEngine3D/Input/InputManager.h>
+#include <OwnedEngine3D/Manager/InputManager.h>
 #include "SDL3/SDL_events.h"
 
 InputManager::InputManager()

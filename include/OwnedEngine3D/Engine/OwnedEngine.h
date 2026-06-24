@@ -10,7 +10,7 @@
 #include "OwnedEngine3D/Engine/Window.h"
 #include "OwnedEngine3D/Manager/ResourcesManager.h"
 #include "OwnedEngine3D/Manager/EntitiesManager.h"
-#include "OwnedEngine3D/Input/InputManager.h"
+#include "OwnedEngine3D/Manager/InputManager.h"
 
 
 struct EngineDescriptor
@@ -23,6 +23,8 @@ struct EngineDescriptor
 
 	float timestep;
 	float fixeTimestep;
+
+	std::string firstScene;
 };
 
 

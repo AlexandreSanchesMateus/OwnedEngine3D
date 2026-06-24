@@ -1,6 +1,6 @@
 #include "OwnedEngine3D/GraphicsPipeline/Shader.h"
 #include "OwnedEngine3D/Engine/GPUDevice.h"
-#include "SDL3/SDL_gpu.h"
+#include <SDL3/SDL_gpu.h>
 
 Shader::Shader(GPUDevice* device, const std::filesystem::path& file, const std::string& entryPoint, bool isVertexSatge, int numSamplers, int numStorageBuffers, int numStorageTextures, int numUniformBuffers) : m_device(device)
 {

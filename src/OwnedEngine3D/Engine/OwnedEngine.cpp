@@ -1,9 +1,10 @@
-#include "OwnedEngine3D/OwnedEngine.h"
+#include "OwnedEngine3D/Engine/OwnedEngine.h"
 #include "OwnedEngine3D/File.h"
 #include <thread>
 #include <SDL3/SDL.h>
 
 #include "OwnedEngine3D/Render/IRenderer.h"
+#include "OwnedEngine3D/Manager/EntitiesManager.h"
 
 std::chrono::milliseconds OwnedEngine::timestep = std::chrono::milliseconds(5);          // around 200 fps
 std::chrono::milliseconds OwnedEngine::fixedTimestep = std::chrono::milliseconds(16);    // around 60 fps
@@ -27,6 +28,8 @@ OwnedEngine::OwnedEngine(const EngineDescriptor& descriptor)
 	fixedTimestep = std::chrono::milliseconds((long)descriptor.fixeTimestep);
 
 	// Load Pipelines (or renderer)
+
+
 
 }
 
@@ -135,7 +138,7 @@ void OwnedEngine::DrawScreen()
 		// Need to reference RenderPass and ECS registry
 		// BindPipeline
 		// DrawPrimitives
-		(*it)->Render();
+		(*it)->Render(renderPass, m_entityManager.GetRegister());
 	}
 
 	SDL_EndGPURenderPass(renderPass);

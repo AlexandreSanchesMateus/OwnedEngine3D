@@ -8,17 +8,17 @@
 
 #include "OwnedEngine3D/Manager/ResourcesManager.h"
 #include "OwnedEngine3D/Engine/GraphicsPipeline.h"
-#include "OwnedEngine3D/Input/InputManager.h"
+#include "OwnedEngine3D/Manager/InputManager.h"
 
 // Tempo
 #include <SDL3/SDL.h>
 #include "OwnedEngine3D/GraphicsPipeline/Vertex.h"
-#include "OwnedEngine3D/Transform.h"
+#include "OwnedEngine3D/Component/Transform.h"
 
 #include "OwnedEngine3D/Logger/Logger.h"
 #include "OwnedEngine3D/Logger/LoggerInstance.h"
 
-#include "OwnedEngine3D/Mesh.h"
+#include "OwnedEngine3D/Component/Mesh.h"
 
 
 static DebugVertex vertices[3]

@@ -1,4 +1,4 @@
-#include "OwnedEngine3D/Mesh.h"
+#include "OwnedEngine3D/Component/Mesh.h"
 
 Mesh::Mesh() : m_vertices(), m_indexes()
 {

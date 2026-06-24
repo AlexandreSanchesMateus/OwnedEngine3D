@@ -56,6 +56,12 @@ public:
 	Mat4 GetWorldTransformMatrix() const;
 	Mat4 GetWorldInvertMatrix() const;
 
+	//SERIALIZE
+	//UNSERIALIZE
+
+	//POPULATE
+	//MULTI_POPULATE
+
 private:
 	void AttachChild(Transform* transform);
 	void DetachChild(Transform* transform);

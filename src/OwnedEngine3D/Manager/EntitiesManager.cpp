@@ -1,6 +1,6 @@
 #include "OwnedEngine3D/Manager/EntitiesManager.h"
 #include "OwnedEngine3D/File.h"
-#include "OwnedEngine3D/Component/MetadataComponent.h"
+#include "OwnedEngine3D/Component/EntityInfo.h"
 
 
 EntitiesManager::EntitiesManager() : m_registry(entt::registry())
@@ -32,7 +32,7 @@ entt::registry* EntitiesManager::GetRegister()
 entt::handle EntitiesManager::CreateEntity(const std::string& name)
 {
 	entt::handle entity(m_registry, m_registry.create());
-	entity.emplace<MetadataComponant>(name, 0 , 0);
+	entity.emplace<EntityInfo>(name, 0, 0);
 	return entity;
 }
 

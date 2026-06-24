@@ -15,8 +15,13 @@ public:
 	const std::vector<MeshVertex>& GetVertices() const;
 	const std::vector<int>& GetIndexes() const;
 
+	//SERIALIZE
+	//UNSERIALIZE
+
+	//POPULATE
+	//MULTI_POPULATE
+
 private:
-	
 	std::vector<MeshVertex> m_vertices;
 	std::vector<int> m_indexes;
 
