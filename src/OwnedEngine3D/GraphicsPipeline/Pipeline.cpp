@@ -1,4 +1,4 @@
-#include "OwnedEngine3D/Engine/GraphicsPipeline.h"
+#include "OwnedEngine3D/GraphicsPipeline/Pipeline.h"
 #include "OwnedEngine3D/Engine/GPUDevice.h"
 #include "OwnedEngine3D/Engine/Window.h"
 #include "OwnedEngine3D/Manager/ResourcesManager.h"
@@ -6,14 +6,11 @@
 #include "OwnedEngine3D/GraphicsPipeline/Vertex.h"
 #include <SDL3/SDL_gpu.h>
 
-GraphicsPipeline::GraphicsPipeline(GPUDevice* device, Window* window, ResourcesManager* resourcesManager) : m_device(device)
+Pipeline::Pipeline(GPUDevice* device, Window* window, const PipelineDescriptor& descriptor) : m_device(device)
 {
-	std::shared_ptr<Shader> vertexShader = resourcesManager->GetShader("simple_vertex.shader");
-	std::shared_ptr<Shader> fragmentShader = resourcesManager->GetShader("simple_fragment.shader");
-
 	SDL_GPUGraphicsPipelineCreateInfo pipelineInfo{};
-	pipelineInfo.vertex_shader = vertexShader->GetHandle();
-	pipelineInfo.fragment_shader = fragmentShader->GetHandle();
+	pipelineInfo.vertex_shader = descriptor.vertexShader->GetHandle();
+	pipelineInfo.fragment_shader = descriptor.fragmentShader->GetHandle();
 	pipelineInfo.primitive_type = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
 
 	SDL_GPUVertexBufferDescription vertexBufferDesctiptions[1]{};
@@ -57,12 +54,12 @@ GraphicsPipeline::GraphicsPipeline(GPUDevice* device, Window* window, ResourcesM
 	m_graphicsPipeline = SDL_CreateGPUGraphicsPipeline(m_device->GetHandle(), &pipelineInfo);
 }
 
-GraphicsPipeline::~GraphicsPipeline()
+Pipeline::~Pipeline()
 {
 	SDL_ReleaseGPUGraphicsPipeline(m_device->GetHandle(), m_graphicsPipeline);
 }
 
-SDL_GPUGraphicsPipeline* GraphicsPipeline::GetHandle() const
+SDL_GPUGraphicsPipeline* Pipeline::GetHandle() const
 {
 	return m_graphicsPipeline;
 }

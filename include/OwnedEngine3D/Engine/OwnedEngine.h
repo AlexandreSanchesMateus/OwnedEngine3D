@@ -13,7 +13,7 @@
 #include "OwnedEngine3D/Manager/InputManager.h"
 
 
-struct EngineDescriptor
+struct OWNED_ENGINE_API EngineDescriptor
 {
 	std::string windowName;
 	int windowWidth;
@@ -52,11 +52,11 @@ private:
 	Window m_window;
 	GPUDevice m_gpuDevice;
 
-	// Renders
-	std::vector<std::unique_ptr<IRenderer>> m_renderers;
-
 	// Services
 	ResourcesManager m_resourcesManager;
 	EntitiesManager m_entityManager;
 	InputManager m_inputManager;
+
+	// Renders
+	std::vector<std::unique_ptr<IRenderer>> m_renderers;
 };

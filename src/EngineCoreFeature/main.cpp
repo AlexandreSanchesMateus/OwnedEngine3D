@@ -4,10 +4,9 @@
 #include "OwnedEngine3D/Engine/Core.h"
 #include "OwnedEngine3D/Engine/GPUDevice.h"
 #include "OwnedEngine3D/Engine/Window.h"
-#include "OwnedEngine3D/Engine/GraphicsPipeline.h"
+#include "OwnedEngine3D/GraphicsPipeline/Pipeline.h"
 
 #include "OwnedEngine3D/Manager/ResourcesManager.h"
-#include "OwnedEngine3D/Engine/GraphicsPipeline.h"
 #include "OwnedEngine3D/Manager/InputManager.h"
 
 // Tempo
@@ -91,7 +90,7 @@ int main(int argc, char* argv[])
 	Mesh cube(std::move(vert), std::move(ind));
 
 
-	GraphicsPipeline graphicsPipeline(&device, &window, &resources);
+	Pipeline graphicsPipeline(&device, &window, &resources);
 
 	SDL_GPUBuffer* vertexBuffer;
 	SDL_GPUTransferBuffer* transferBuffer;

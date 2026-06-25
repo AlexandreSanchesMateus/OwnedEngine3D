@@ -2,8 +2,9 @@
 #include "OwnedEngine3D/File.h"
 #include <thread>
 #include <SDL3/SDL.h>
+#include <stdexcept>
 
-#include "OwnedEngine3D/Render/IRenderer.h"
+#include "OwnedEngine3D/Render/MeshRenderer.h"
 #include "OwnedEngine3D/Manager/EntitiesManager.h"
 
 std::chrono::milliseconds OwnedEngine::timestep = std::chrono::milliseconds(5);          // around 200 fps
@@ -28,8 +29,12 @@ OwnedEngine::OwnedEngine(const EngineDescriptor& descriptor)
 	fixedTimestep = std::chrono::milliseconds((long)descriptor.fixeTimestep);
 
 	// Load Pipelines (or renderer)
+	// Skybox
+	
+	// Mesh
+	m_renderers.push_back(std::make_unique<MeshRenderer>());
 
-
+	// UI
 
 }
 
@@ -86,18 +91,9 @@ void OwnedEngine::Run()
 
 EngineDescriptor OwnedEngine::PaseDescriptorFromFile(const std::string& configName)
 {
-	// TODO
-	// Parse Json File
-
-	EngineDescriptor descriptor{
-		"Owned Engine 3D",
-		1280,
-		720,
-		NULL,
-		SDL_GPU_SHADERFORMAT_SPIRV
-	};
-
-	return descriptor;
+	throw std::runtime_error("OwnedEngine::PaseDescriptorFromFile : not yet implemented");
+	
+	return EngineDescriptor();
 }
 
 
